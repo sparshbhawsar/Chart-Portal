@@ -1,0 +1,68 @@
+
+<div class="no-style" style="margin-left: 4px">
+    <div class="container col-md-4 col-lg-4 col-sm-12">
+        <h1>Enter Chart Data</h1>
+        <form> 
+            <div class="form-group">
+                <label for="Userid"><br>UserID {{userID}}<br></label>
+                <input type="text" class="form-control" id="Userid" #userid required value="{{userID}}">
+                <label for="Chartname"><br>Chartname<br></label>
+                <input type="text" class="form-control" id="Chartname" #chartname required>
+              </div>
+              
+              <div class="form-group">
+            <label for="Labelx"><br>Label(x)<br></label>
+            <input type="text" class="form-control" id="Labelx" required>
+            <label for="Labely"><br>Label(y)<br></label>
+            <input type="text" class="form-control" id="Labely" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="select">Select Chart type</label>
+            <select name="charttypes" id="charttypes" #chartType class="form-control">
+              <option *ngFor="let type of chartTypes[0]" value="{{type}}">{{type}}</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="Valuex"><br>Value(x)<br></label>
+            <input type="text" class="form-control" id="Valuex" #valueX required> 
+            <label for="Valuey"><br>Value(y)<br></label>
+            <input type="text" class="form-control" id="Valuey" #valueY required>
+          </div>
+  <br>
+      <button (click)="insertData(chartType.value)" type="button" class="btn btn-primary">Create Chart</button>  
+      &nbsp;
+      &nbsp;
+      <button (click)="loadPrevious()" type="button" class="btn btn-success">Load Previous Data  </button> 
+      &nbsp;
+      &nbsp;      
+      <button (click)="addvalues(valueX.value,valueY.value,userid.value,chartname.value)" type="button" class="btn btn-default">Add Data</button>
+    </form>
+    </div>
+  
+  <br>
+  <br>
+  
+  <div class="prevdata" id="prevdata">
+    <table class="table table-striped table-responsive">
+      <tr class="text-center">
+      <th>Userid</th>
+      <th>Chartname</th>
+      <th>ValueX</th>
+      <th>ValueY</th>
+    </tr>
+  
+    <tr *ngFor="let data of datasets"> 
+      <td>{{data.c}}</td>
+      <td>{{data.u}}</td>
+      <td>{{data.x}}</td>
+      <td>{{data.y}}</td>
+    
+    </tr>
+    </table>
+   </div>
+    <div >
+      <canvas #canvas id="canvas">{{ chart }}</canvas>
+   </div>
+  <router-outlet></router-outlet>>
